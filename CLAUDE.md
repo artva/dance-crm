@@ -9,6 +9,39 @@ This project uses a fully AI-driven development workflow via GitHub Actions and 
 
 ### Issue Lifecycle
 
+```mermaid
+flowchart TD
+    A([User]) -->|creates GH issue via Claude Code CLI| B[GH Issue]
+    B -->|reviews & corrects| B
+    B -->|applies labels:\ndesign / implementation| C{Labels?}
+    C -->|applies 'ready' label| D[[agent.yml triggered]]
+
+    D --> E{has 'design' label?}
+    E -->|yes| F[/design-feature/]
+    F --> G[create DESIGN.md\nin target package]
+    G --> H[open PR\ndesign/issue-N]
+
+    E -->|no| I{has 'implementation' label?}
+    H --> I
+
+    I -->|yes| J[/implement-feature/]
+    J --> K[read DESIGN.md\nfiles up the tree]
+    K --> L[implement feature]
+    L --> M[open PR\nfeature/issue-N]
+
+    H -->|reviewer requests changes| R1[[revision-agent.yml]]
+    M -->|reviewer requests changes| R2[[revision-agent.yml]]
+
+    R1 --> RD[/revise-design/]
+    R2 --> RI[/revise-implementation/]
+
+    RD -->|push fixes| H
+    RI -->|push fixes| M
+
+    H -->|approved & merged| Done([Done])
+    M -->|approved & merged| Done
+```
+
 1. **Issue creation** — User asks Claude Code (CLI) to create a GH issue.
 2. **Review** — User reviews and corrects the issue.
 3. **Tag the issue** — User applies `design` and/or `implementation` labels.
