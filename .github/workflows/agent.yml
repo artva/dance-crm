@@ -39,6 +39,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: /design-feature
+          show_full_output: true
 
       - name: Run implementation skill
         if: contains(steps.labels.outputs.labels, 'implementation')
@@ -49,3 +50,4 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: /implement-feature
+          show_full_output: true
