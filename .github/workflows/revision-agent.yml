@@ -25,7 +25,7 @@ jobs:
 
       - name: Run design revision skill
         if: startsWith(github.event.pull_request.head.ref, 'design/')
-        uses: anthropic/claude-code-action@beta
+        uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: Run implementation revision skill
         if: startsWith(github.event.pull_request.head.ref, 'feature/')
-        uses: anthropic/claude-code-action@beta
+        uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}

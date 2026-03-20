@@ -31,7 +31,7 @@ jobs:
 
       - name: Run design skill
         if: contains(steps.labels.outputs.labels, 'design')
-        uses: anthropic/claude-code-action@beta
+        uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -41,7 +41,7 @@ jobs:
 
       - name: Run implementation skill
         if: contains(steps.labels.outputs.labels, 'implementation')
-        uses: anthropic/claude-code-action@beta
+        uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
